@@ -1,3 +1,15 @@
 
+import { Console } from 'console';
+import express, { Request, Response, NextFunction } from 'express';
 
-console.log('dan aqui');
+const app = express();
+
+
+app.get('/status', (req: Request, res:Response , next:NextFunction ) => {
+    res.status(200).send({  foo: 'sucesso total! voces sao demais!? '});
+});
+
+
+app.listen(3000, () => {
+    console.log('Aplicação executando na porta 3000!');
+});
