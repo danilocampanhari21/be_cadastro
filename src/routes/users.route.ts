@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
+import { StatusCodes }  from 'http-status-codes';
 
 // get /users
 // get /user/:uuid
@@ -8,12 +9,24 @@ import { Router, Request, Response, NextFunction } from "express";
 
 
 
-const usersRoute = Router ();
+const usersRoute = Router();
 
-usersRoute.get('/', (req: Request, res: Response, next: NextFunction) => {
-
+usersRoute.get('/users', (req: Request, res: Response, next: NextFunction) => {
+    const users = [{ userName: 'Danilo' }];
+    res.status(StatusCodes.OK).send(users);
 });
 
+usersRoute.get('/users/:uuid', (req: Request<{uuid: string }>, res: Response, next: NextFunction) => {
+    const uuid = req.params.uuid;
+    res.status(StatusCodes.OK).send ({ uuid });
+});
+
+usersRoute.post('/user', (req: Request, res: Response, next: NextFunction) => {
+    const newUser = req.body;
+    res.status(StatusCodes.CREATED).send(newUser);
+});
+
+export default usersRoute;
 
 
 
